@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>First Elements of Array</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 30px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #output {
+      background: #e6f7ff;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Get First Elements of Array</h2>
+    <label>Enter array (comma-separated):</label>
+    <input type="text" id="arrayInput" placeholder="Example: 7,9,0,-2">
+    
+    <label>Enter n (optional):</label>
+    <input type="number" id="nInput" placeholder="Leave empty for first element">
+
+    <button onclick="handleClick()">Get Result</button>
+    
+    <h3>Output:</h3>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function first(arr, n) {
+      if (!Array.isArray(arr)) return [];
+      if (n == null || n === '') return arr[0];
+      if (n < 0) return [];
+      return arr.slice(0, n);
+    }
+
+    function handleClick() {
+      const arrayStr = document.getElementById("arrayInput").value;
+      const nStr = document.getElementById("nInput").value;
+      const outputDiv = document.getElementById("output");
+
+      // Convert comma-separated string to array of numbers
+      const arr = arrayStr.split(',').map(x => parseFloat(x.trim())).filter(x => !isNaN(x));
+
+      const n = nStr === "" ? null : parseInt(nStr);
+
+      const result = first(arr, n);
+      outputDiv.textContent = JSON.stringify(result);
+    }
+  </script>
+</body>
+</html>
